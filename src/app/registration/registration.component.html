@@ -1,0 +1,53 @@
+<form [formGroup]="registrationForm" (ngSubmit)="register()">
+    <div>
+      <label>First Name:</label>
+      <input formControlName="firstName">
+      <div *ngIf="registrationForm.get('firstName')?.disabled && registrationForm.get('firstName')?.touched">
+        Please enter First Name
+      </div>
+      <div *ngIf="registrationForm.get('firstName')?.errors?.['pattern']">First name must contain only alphabets.</div>
+
+    </div>
+  
+    <div>
+      <label>Last Name:</label>
+      <input formControlName="lastName">
+      <div *ngIf="registrationForm.get('lastName')?.disabled && registrationForm.get('lastName')?.touched">
+        Please enter Last Name
+      </div>
+    </div>
+  
+    <div>
+      <label>Phone Number:</label>
+      <input formControlName="mobile">
+      <div *ngIf="registrationForm.get('mobile')?.disabled && registrationForm.get('mobile')?.touched">
+        Please enter Phone Number
+      </div>
+    </div>
+  
+    <div>
+      <label>Email:</label>
+      <input formControlName="email" type="email">
+      <div *ngIf="registrationForm.get('email')?.disabled && registrationForm.get('email')?.touched">
+        Please enter Email
+      </div>
+    </div>
+  
+    <div>
+      <label>Password:</label>
+      <input formControlName="password" type="password">
+      <div *ngIf="registrationForm.get('password')?.disabled && registrationForm.get('password')?.touched">
+        Please enter Password
+      </div>
+    </div>
+  
+    <div>
+      <label>Confirm Password:</label>
+      <input formControlName="confirmPassword" type="password">
+      <div *ngIf="registrationForm.hasError('passwordMismatch') && registrationForm.get('confirmPassword')?.touched">
+        Passwords must match.
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+  </form>
