@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/user'; 
 
   constructor(private http: HttpClient) {}
 
@@ -14,7 +13,7 @@ export class UserService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post('http://localhost:8080/user/register', userData, { headers, responseType: 'text' });
+    return this.http.post('http://localhost:8080/auth/register', userData, { headers, responseType: 'text' });
   }
   
 }
