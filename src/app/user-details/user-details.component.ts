@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { ApiserviceService } from '../services/apiservice.service';
 import { AuthLoggingInterceptor } from '../interceptors/auth-logging.interceptor';
 
 @Component({
@@ -29,7 +28,6 @@ export class UserDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private apiService: ApiserviceService
   ) {
     this.userDetailsForm = this.fb.group({
       firstName: ['', [Validators.required]],
