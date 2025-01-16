@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ApiserviceService } from '../services/apiservice.service';
+import { AuthLoggingInterceptor } from '../interceptors/auth-logging.interceptor';
 
 @Component({
   selector: 'app-user-details',
@@ -12,6 +13,13 @@ import { ApiserviceService } from '../services/apiservice.service';
   imports: [ReactiveFormsModule, NgIf],
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css'],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthLoggingInterceptor,
+      multi: true
+    },
+  ]
 })
 export class UserDetailsComponent implements OnInit {
   userDetailsForm: FormGroup;
@@ -28,21 +36,21 @@ export class UserDetailsComponent implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      username: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     this.http
-      .get('http://localhost:8080/auth/user/userProfile', this.apiService.addAuth())
-      .subscribe({
-        next: (data) => {
-          this.placeholders = data; 
-          this.userDetailsForm.patchValue(data); 
-        },
-        error: (error) => {
-          console.error('Error fetching user details:', error.message);  
-          alert('Failed to fetch user details: ' + error.message);  
+      .get('http://localhost:8080/auth/user/userProfile', { withCredentials : true, responseType : "text" })
+      .subscribe(response => {
+        try{
+          const jsonResponse = JSON.parse(response);
+          console.log(jsonResponse);
+          this.placeholders = jsonResponse; 
+          this.userDetailsForm.patchValue(jsonResponse);
+        }catch(e){
+          console.log(response);
         }
       });
   }
@@ -54,14 +62,13 @@ export class UserDetailsComponent implements OnInit {
         .post(
           'http://localhost:8080/auth/user/update/userProfile',
           this.userDetailsForm.value,
-          this.apiService.addAuth()
+          { withCredentials: true , responseType : "text" },
         )
         .subscribe({
           next: () => {
             alert('Details updated successfully!');
             this.router.navigate(['/']); // Navigate to home or login page
-          },
-          error: () => alert('Failed to update details. Please try again.'),
+          }
         });
     } else {
       alert('Please correct the errors before saving.');

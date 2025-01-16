@@ -50,11 +50,11 @@
     <div>
       <label>Username:</label>
       <input
-        formControlName="username"
+        formControlName="userName"
         type="text"
-        [placeholder]="placeholders.username || 'Enter Username'"
+        [placeholder]="placeholders.userName || 'Enter Username'"
       />
-      <div *ngIf="userDetailsForm.get('username')?.invalid && userDetailsForm.get('username')?.touched">
+      <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
         Username is required.
       </div>
     </div>

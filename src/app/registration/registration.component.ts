@@ -53,7 +53,6 @@ export class RegistrationComponent {
     }
   
     const userData = this.registrationForm.value;
-    delete userData.mobile;
     delete userData.confirmPassword; 
     console.log(userData);
   

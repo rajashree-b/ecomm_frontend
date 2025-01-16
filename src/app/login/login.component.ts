@@ -15,7 +15,7 @@ import { ApiserviceService } from '../services/apiservice.service';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public router: Router, private http: HttpClient,private apiService:ApiserviceService) {
+  constructor(private fb: FormBuilder, public router: Router, private http: HttpClient) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -24,8 +24,7 @@ export class LoginComponent {
 
   login() {
     const { email, password } = this.loginForm.value;
-    const headers = this.apiService.addAuth();
-    this.http.post(('http://localhost:8080/auth/generateToken'), { email, password },{responseType:'text'}).subscribe({
+    this.http.post(('http://localhost:8080/auth/generateToken'), { email, password },{withCredentials : true,responseType:'text'}).subscribe({
       next: () => {
         alert('Login successful!');
         this.router.navigate(['/user-details']);
