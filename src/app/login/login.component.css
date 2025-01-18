@@ -1,4 +1,19 @@
-/* General form container styling */
+h1 {
+  font-size: 3rem;
+  color: #5e60ce; 
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+h2{
+  font-size:2rem;
+  text-align:center;
+  color:rgb(128, 14, 128)
+}
+  
 form {
     max-width: 400px;
     margin: 50px auto;
@@ -13,6 +28,8 @@ form {
     margin-bottom: 20px;
   }
   
+  
+
   label {
     display: block;
     font-size: 14px;
@@ -36,7 +53,6 @@ form {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
-  
  
   
   button {
@@ -60,11 +76,16 @@ form {
   }
   
   button:nth-of-type(2) {
-    background-color: #6c757d;
+    background-color: #217bc9;
     margin-left: 10px;
   }
   
   button:nth-of-type(2):hover {
-    background-color: #5a6268;
+    background-color: #2583ca;
   }
   
+  .error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+  }

@@ -1,4 +1,7 @@
-form {
+h1{
+  text-align: center;
+}
+   form {
     max-width: 500px;
     margin: 50px auto;
     padding: 20px;
@@ -21,8 +24,13 @@ form {
   
   input[type="text"],
   input[type="email"],
-  input[type="password"]
-   {
+  input[type="password"],
+  input[formControlName="firstName"],
+  input[formControlName="lastName"],
+  input[formControlName="mobile"],
+  input[formControlName="email"],
+  input[formControlName="password"],
+  input[formControlName="confirmPassword"]  {
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -31,12 +39,7 @@ form {
     box-sizing: border-box;
   }
   
-  input[formControlName="firstname"],
-  input[formControlName="lastname"],
-  input[formControlName="phoneNumber"],
-  input[formControlName="email"],
-  input[formControlName="password"],
-  input[formControlName="confirmPassword"] {
+  input[formControlName] {
     width: 100%;
   }
   
@@ -46,7 +49,12 @@ form {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
   
-   
+  input:disabled {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+  }
+  
+  /* Button styling */
   button {
     padding: 10px 15px;
     font-size: 14px;
@@ -66,14 +74,16 @@ form {
   button:hover:not([disabled]) {
     background-color: #0056b3;
   }
+
   
-  input:disabled {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+  input.ng-touched.ng-invalid {
+    /* border-color: red; Red border for invalid fields */
+    background-color: #fff5f5;
   }
   
-  div.has-error {
+  .error-message {
     color: red;
-    font-size: 12px;
+    font-size: 16px;
+    margin-top: 5px;
   }
   

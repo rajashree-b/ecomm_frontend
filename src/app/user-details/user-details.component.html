@@ -1,64 +1,73 @@
+
+<h1>Welcome {{ userDetailsForm.get('userName')?.value }}!</h1>
+
+<h1>User Details</h1>
 <form [formGroup]="userDetailsForm" (ngSubmit)="saveDetails()">
-    <div>
-      <label>First Name:</label>
-      <input
-        formControlName="firstName"
-        type="text"
-        [placeholder]="placeholders.firstName || 'Enter First Name'"
-      />
-      <div *ngIf="userDetailsForm.get('firstName')?.invalid && userDetailsForm.get('firstName')?.touched">
-        First name is required.
-      </div>
+  <div>
+    <label>First Name:</label>
+    <input
+      formControlName="firstName"
+      type="text"
+      [readonly]="!isEditing"
+      [placeholder]="placeholders.firstName || 'Enter First Name'"
+    />
+    <div *ngIf="userDetailsForm.get('firstName')?.invalid && userDetailsForm.get('firstName')?.touched">
+      First name is required.
     </div>
-  
-    <div>
-      <label>Last Name:</label>
-      <input
-        formControlName="lastName"
-        type="text"
-        [placeholder]="placeholders.lastName || 'Enter Last Name'"
-      />
-      <div *ngIf="userDetailsForm.get('lastName')?.invalid && userDetailsForm.get('lastName')?.touched">
-        Last name is required.
-      </div>
+  </div>
+
+  <div>
+    <label>Last Name:</label>
+    <input
+      formControlName="lastName"
+      type="text"
+      [readonly]="!isEditing"
+      [placeholder]="placeholders.lastName || 'Enter Last Name'"
+    />
+    <div *ngIf="userDetailsForm.get('lastName')?.invalid && userDetailsForm.get('lastName')?.touched">
+      Last name is required.
     </div>
-  
-    <div>
-      <label>Email:</label>
-      <input
-        formControlName="email"
-        type="email"
-        [placeholder]="placeholders.email || 'Enter Email Address'"
-      />
-      <div *ngIf="userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched">
-        Enter a valid email.
-      </div>
+  </div>
+
+  <div>
+    <label>Email:</label>
+    <input
+      formControlName="email"
+      type="email"
+      [readonly]="!isEditing"
+      [placeholder]="placeholders.email || 'Enter Email Address'"
+    />
+    <div *ngIf="userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched">
+      Enter a valid email.
     </div>
-  
-    <div>
-      <label>Mobile:</label>
-      <input
-        formControlName="mobile"
-        type="text"
-        [placeholder]="placeholders.mobile || 'Enter Mobile Number'"
-      />
-      <div *ngIf="userDetailsForm.get('mobile')?.invalid && userDetailsForm.get('mobile')?.touched">
-        Enter a valid 10-digit mobile number.
-      </div>
+  </div>
+
+  <div>
+    <label>Mobile:</label>
+    <input
+      formControlName="mobile"
+      type="text"
+      [readonly]="!isEditing"
+      [placeholder]="placeholders.mobile || 'Enter Mobile Number'"
+    />
+    <div *ngIf="userDetailsForm.get('mobile')?.invalid && userDetailsForm.get('mobile')?.touched">
+      Enter a valid 10-digit mobile number.
     </div>
-  
-    <div>
-      <label>Username:</label>
-      <input
-        formControlName="userName"
-        type="text"
-        [placeholder]="placeholders.userName || 'Enter Username'"
-      />
-      <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
-        Username is required.
-      </div>
+  </div>
+
+  <div>
+    <label>Username:</label>
+    <input
+      formControlName="userName"
+      type="text"
+      [readonly]="!isEditing"
+      [placeholder]="placeholders.userName || 'Enter Username'"
+    />
+    <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
+      Username is required.
     </div>
-  
-    <button type="submit" [disabled]="userDetailsForm.invalid">Save Details</button>
-  </form>
-  
+  </div>
+
+  <button *ngIf="!isEditing" type="button" (click)="toggleEdit()" class="edit-button">Edit</button>
+  <button *ngIf="isEditing" type="submit" [disabled]="userDetailsForm.invalid">Save Details</button>
+</form>
