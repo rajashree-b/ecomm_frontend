@@ -16,19 +16,16 @@ export class AuthLoggingInterceptor implements HttpInterceptor {
       withCredentials: true,  // Set credentials flag to true if you want cookies to be sent with cross-origin requests
     });
 
-    // Log the request details
     console.log('Cloned Request:', clonedRequest);
 
     return next.handle(clonedRequest).pipe(
       tap(
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-            // Log the response details
             console.log('Response:', event);
           }
         },
         (error) => {
-          // Handle error and log it
           console.error('Error response:', error);
         }
       )

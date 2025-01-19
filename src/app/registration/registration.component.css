@@ -54,7 +54,6 @@ h1{
     border: 1px solid #ddd;
   }
   
-  /* Button styling */
   button {
     padding: 10px 15px;
     font-size: 14px;
@@ -77,7 +76,6 @@ h1{
 
   
   input.ng-touched.ng-invalid {
-    /* border-color: red; Red border for invalid fields */
     background-color: #fff5f5;
   }
   

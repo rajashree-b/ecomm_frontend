@@ -28,12 +28,10 @@ form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Form fields spacing */
 form > div {
   margin-bottom: 16px;
 }
 
-/* Label styling */
 label {
   font-size: 14px;
   font-weight: 600;
@@ -42,7 +40,6 @@ label {
   color: #333;
 }
 
-/* Input field styling */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -62,20 +59,17 @@ input[type="password"]:focus {
   border-color: #007bff;
 }
 
-/* Placeholder styling */
 input::placeholder {
   color: #999;
   font-style: italic;
 }
 
-/* Error message styling */
 div > div {
   color: #e74c3c;
   font-size: 12px;
   margin-top: 4px;
 }
 
-/* Submit button styling */
 button[type="submit"] {
   display: inline-block;
   width: 100%;
@@ -99,7 +93,6 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
-/* Edit button styles */
 button.edit-button {
   background-color: #007bff;
   color: white;
@@ -123,7 +116,7 @@ button.edit-button:active {
 }
 
 /* Cancel button styles */
-button.cancel-button {
+/* button.cancel-button {
   background-color: #dc3545;
   color: white;
   padding: 10px 20px;
@@ -133,24 +126,22 @@ button.cancel-button {
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-}
+} */
 
-button.cancel-button:hover {
+/* button.cancel-button:hover {
   background-color: #b02a37;
   transform: scale(1.05);
 }
 
 button.cancel-button:active {
   background-color: #891f2a;
-}
+} */
 
-/* Add focus outline for accessibility */
 button:focus {
   outline: 2px solid #80bdff;
   outline-offset: 2px;
 }
 
-/* Disabled button styling */
 button:disabled {
   background-color: #d6d6d6;
   color: #7c7c7c;
