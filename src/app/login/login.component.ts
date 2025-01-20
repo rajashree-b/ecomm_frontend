@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgIf } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public router: Router, private http: HttpClient,private toastr:ToastrService) {
+  constructor(private fb: FormBuilder, public router: Router, private http: HttpClient,private toastr:ToastrService,private titleService: Title) {
+    this.titleService.setTitle('Login');
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
@@ -27,7 +31,7 @@ export class LoginComponent {
     this.http.post(('http://localhost:8080/auth/generateToken'), { email, password },{withCredentials : true,responseType:'text'}).subscribe({
       next: () => {
         // alert('Login successful!');
-        this.toastr.success('Login successful!','Success');
+        this.toastr.success('Login successful!','');
         this.router.navigate(['/user-details']);
       },
       error: () => {

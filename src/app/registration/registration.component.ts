@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgIf, CommonModule } from '@angular/common'; 
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { ToastrModule } from 'ngx-toastr'; 
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registration',
@@ -23,10 +24,12 @@ export class RegistrationComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
+    public router: Router,
     private userService: UserService,
-    private toastr: ToastrService 
+    private toastr: ToastrService,
+    private TitleService:Title
   ) {
+     this.TitleService.setTitle("Register");
     this.registrationForm = this.fb.group(
       {
         firstName: ['', [Validators.pattern('^[a-zA-Z]+$')]],

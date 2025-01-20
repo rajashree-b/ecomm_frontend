@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { AuthLoggingInterceptor } from '../interceptors/auth-logging.interceptor';
 import { ToastrService } from 'ngx-toastr';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-details',
@@ -31,8 +32,10 @@ export class UserDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    private titleService:Title
   ) {
+    this.titleService.setTitle("User Profile");
     this.userDetailsForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
