@@ -20,7 +20,7 @@ bootstrapApplication(AppComponent, {
       BrowserAnimationsModule, 
       ToastrModule.forRoot(
         {
-        positionClass: 'toast-bottom-center',
+        positionClass: 'toast-top-right',
         // preventDuplicates: true,
         // closeButton: true,
         timeOut: 5000,

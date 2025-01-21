@@ -31,7 +31,7 @@ export class LoginComponent {
     this.http.post(('http://localhost:8080/auth/generateToken'), { email, password },{withCredentials : true,responseType:'text'}).subscribe({
       next: () => {
         // alert('Login successful!');
-        this.toastr.success('Login successful!','');
+        this.toastr.success('Login successful!','Success');
         this.router.navigate(['/user-details']);
       },
       error: () => {

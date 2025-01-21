@@ -43,7 +43,7 @@
         <div *ngIf="registrationForm.get('email')?.errors?.['required']" class="error-message">
           Email is required.
         </div>
-        <div *ngIf="registrationForm.get('email')?.errors?.['email']">
+        <div *ngIf="registrationForm.get('email')?.errors?.['email']" class="error-message">
           Enter a valid email address.
         </div>
       </div>

@@ -1,39 +1,30 @@
-
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
-import { AuthLoggingInterceptor } from '../interceptors/auth-logging.interceptor';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports:[ReactiveFormsModule,NgIf],
   templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css'],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthLoggingInterceptor,
-      multi: true
-    },
-  ]
+  styleUrls: ['./user-details.component.css']
 })
 
 export class UserDetailsComponent implements OnInit {
   userDetailsForm: FormGroup;
   placeholders: any = {};
-  isEditing: boolean = false; 
+  isEditing: boolean = false;
+  dropdownOpen: boolean = false;
+  isModalOpen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router,
-    private toastr:ToastrService,
-    private titleService:Title
+    private toastr: ToastrService,
+    private titleService: Title
   ) {
     this.titleService.setTitle("User Profile");
     this.userDetailsForm = this.fb.group({
@@ -47,53 +38,48 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('http://localhost:8080/auth/user/userProfile', {
-        withCredentials: true,
-        responseType: 'text',
-      })
-      .subscribe((response) => {
-        try {
-          const jsonResponse = JSON.parse(response);
-          console.log(jsonResponse);
-          this.placeholders = jsonResponse;
-          this.userDetailsForm.patchValue(jsonResponse);
-          this.userDetailsForm.disable(); 
-        } catch (e) {
-          console.log(response);
-        }
+      .get('http://localhost:8080/auth/user/userProfile', { withCredentials: true })
+      .subscribe((response: any) => {
+        console.log(response);
+        this.placeholders = response;
+        this.userDetailsForm.patchValue(response);
+        this.userDetailsForm.disable();  // Start in read-only mode
       });
   }
 
-  toggleEdit(): void {
-    this.isEditing = true;
-    this.userDetailsForm.enable(); 
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
   }
 
+  openEditModal(): void {
+    this.isModalOpen = true;
+    this.isEditing = true;
+    this.userDetailsForm.enable();  // Enable form for editing
+  }
+
+  closeEditModal(): void {
+    this.isModalOpen = false;
+    this.isEditing = false;
+    this.userDetailsForm.disable();  // Disable form to make it read-only
+  }
 
   saveDetails(): void {
     if (this.userDetailsForm.valid) {
       this.http
-        .post(
-          'http://localhost:8080/auth/user/update/userProfile',
-          this.userDetailsForm.value,
-          { withCredentials: true, responseType: 'text' },
-        )
+        .post('http://localhost:8080/auth/user/update/userProfile', this.userDetailsForm.value, { withCredentials: true })
         .subscribe({
           next: () => {
-            // alert('Details updated successfully!');
-            this.toastr.success('Details updated successfully!','Success');
-            this.isEditing = false;
-            this.placeholders = this.userDetailsForm.value; 
-            this.userDetailsForm.disable(); 
+            this.toastr.success('Details updated successfully!', 'Success');
+            this.isModalOpen = false;
+            this.placeholders = this.userDetailsForm.value;  // Update placeholders with new values
+            this.userDetailsForm.disable();  // Disable form again to make it read-only
           },
+          error: () => {
+            this.toastr.error('Failed to update details.', 'Error');
+          }
         });
     } else {
-      // alert('Please correct the errors before saving.');
-      this.toastr.error('Please correct the errors before saving.','Error')
+      this.toastr.error('Please correct the errors before saving.', 'Error');
     }
   }
 }
-
-
-
-

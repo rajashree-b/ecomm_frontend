@@ -1,73 +1,68 @@
+<h1>Welcome {{ placeholders.userName || 'User' }}!</h1>
 
-<h1>Welcome {{ userDetailsForm.get('userName')?.value }}!</h1>
-
-<h1>User Details</h1>
-<form [formGroup]="userDetailsForm" (ngSubmit)="saveDetails()">
-  <div>
-    <label>First Name:</label>
-    <input
-      formControlName="firstName"
-      type="text"
-      [readonly]="!isEditing"
-      [placeholder]="placeholders.firstName || 'Enter First Name'"
-    />
-    <div *ngIf="userDetailsForm.get('firstName')?.invalid && userDetailsForm.get('firstName')?.touched">
-      First name is required.
-    </div>
+<!-- Toggle Dropdown for User Details -->
+<div class="dropdown">
+  <button class="dropdown-toggle" (click)="toggleDropdown()">
+    <i class="icon-user"></i> User Details <span *ngIf="dropdownOpen">▲</span><span *ngIf="!dropdownOpen">▼</span>  </button>
+  <div class="dropdown-content" *ngIf="dropdownOpen">
+    <p><strong>First Name:</strong> {{ placeholders.firstName || ' ' }}</p>
+    <p><strong>Last Name:</strong> {{ placeholders.lastName || ' ' }}</p>
+    <p><strong>Email:</strong> {{ placeholders.email || ' ' }}</p>
+    <p><strong>Mobile:</strong> {{ placeholders.mobile || ' ' }}</p>
+    <p><strong>Username:</strong> {{ placeholders.userName || ' ' }}</p>
+    <button class="edit-button" (click)="openEditModal()">Edit Details</button>
   </div>
+</div>
 
-  <div>
-    <label>Last Name:</label>
-    <input
-      formControlName="lastName"
-      type="text"
-      [readonly]="!isEditing"
-      [placeholder]="placeholders.lastName || 'Enter Last Name'"
-    />
-    <div *ngIf="userDetailsForm.get('lastName')?.invalid && userDetailsForm.get('lastName')?.touched">
-      Last name is required.
-    </div>
+<!-- Modal for Editing User Details -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h2>Edit User Details</h2>
+    <form [formGroup]="userDetailsForm" (ngSubmit)="saveDetails()">
+      <div>
+        <label>First Name:</label>
+        <input formControlName="firstName" type="text" [readonly]="!isEditing"/>
+        <div *ngIf="userDetailsForm.get('firstName')?.invalid && userDetailsForm.get('firstName')?.touched">
+          First name is required.
+        </div>
+      </div>
+
+      <div>
+        <label>Last Name:</label>
+        <input formControlName="lastName" type="text" [readonly]="!isEditing"/>
+        <div *ngIf="userDetailsForm.get('lastName')?.invalid && userDetailsForm.get('lastName')?.touched">
+          Last name is required.
+        </div>
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input formControlName="email" type="email" [readonly]="!isEditing"/>
+        <div *ngIf="userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched">
+          Enter a valid email.
+        </div>
+      </div>
+
+      <div>
+        <label>Mobile:</label>
+        <input formControlName="mobile" type="text" [readonly]="!isEditing"/>
+        <div *ngIf="userDetailsForm.get('mobile')?.invalid && userDetailsForm.get('mobile')?.touched">
+          Enter a valid 10-digit mobile number.
+        </div>
+      </div>
+
+      <div>
+        <label>Username:</label>
+        <input formControlName="userName" type="text" [readonly]="!isEditing"/>
+        <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" [disabled]="userDetailsForm.invalid || !isEditing">Save</button>
+        <button type="button" (click)="closeEditModal()" class="close-button">Cancel</button>
+      </div>
+    </form>
   </div>
-
-  <div>
-    <label>Email:</label>
-    <input
-      formControlName="email"
-      type="email"
-      [readonly]="!isEditing"
-      [placeholder]="placeholders.email || 'Enter Email Address'"
-    />
-    <div *ngIf="userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched">
-      Enter a valid email.
-    </div>
-  </div>
-
-  <div>
-    <label>Mobile:</label>
-    <input
-      formControlName="mobile"
-      type="text"
-      [readonly]="!isEditing"
-      [placeholder]="placeholders.mobile || 'Enter Mobile Number'"
-    />
-    <div *ngIf="userDetailsForm.get('mobile')?.invalid && userDetailsForm.get('mobile')?.touched">
-      Enter a valid 10-digit mobile number.
-    </div>
-  </div>
-
-  <div>
-    <label>Username:</label>
-    <input
-      formControlName="userName"
-      type="text"
-      [readonly]="!isEditing"
-      [placeholder]="placeholders.userName || 'Enter Username'"
-    />
-    <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
-      Username is required.
-    </div>
-  </div>
-
-  <button *ngIf="!isEditing" type="button" (click)="toggleEdit()" class="edit-button">Edit</button>
-  <button *ngIf="isEditing" type="submit" [disabled]="userDetailsForm.invalid">Save Details</button>
-</form>
+</div>

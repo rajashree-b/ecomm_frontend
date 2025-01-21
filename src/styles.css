@@ -1,22 +1,18 @@
-/* Toastr Container for Center Position */
-.toast-bottom-center {
-    bottom: 50px; /* Adjust position slightly above the bottom */
-  left: 50%; /* Center the container horizontally */
-  transform: translateX(-50%);
+.toast-top-right {
+  right: 20px;
+  top:20px;
   position: fixed;
-  z-index: 1050; /* Ensure it appears above other content */
+  z-index: 1050; 
   }
   
-  /* Custom Toast Styles */
   .custom-toast {
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
     padding: 15px;
   }
   
-  /* Success Message Style */
   .toast-success {
     background-color: #4caf50 ; /* Green color */
     color: white;
@@ -24,7 +20,6 @@
 
   }
   
-  /* Error Message Style */
   .toast-error {
     background-color: #f44336 ; /* Red color */
     color: white ;
