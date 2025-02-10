@@ -1,8 +1,7 @@
-/* Header Styling */
 h1:first-of-type {
   font-size: 2rem;
   color: #007bff;
-  text-align: left;
+  text-align: center;
   margin-top: 20px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   font-weight: bold;
@@ -146,7 +145,6 @@ button.edit-button:active {
   justify-content: space-between;
 }
 
-/* Dropdown Styling */
 
 .dropdown {
   margin-bottom: 20px;
@@ -163,20 +161,23 @@ button.edit-button:active {
 }
 
 .dropdown-content {
-  margin-top: 10px;
-  margin-left:10px;
-  margin-right:1000px;
-  border: 1px solid #ccc;
-  padding: 12px;
+  position: absolute; 
+  top: 80px;
+  left: 240px; 
   background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  color:blue
+
 }
 
-.dropdown-content p :first-of-type {
-  color: #a8247c;
-  margin: 5px 0;
+.dropdown-content p {
+  color:#007bff;
+  margin: 10px 0;
 }
-
-
 
 .dropdown-content button {
   background-color: #007bff;
@@ -191,7 +192,6 @@ button.edit-button:active {
   background-color: #0056b3;
 }
 
-/* Focus Outline */
 button:focus {
   outline: 2px solid #80bdff;
   outline-offset: 2px;
@@ -236,4 +236,49 @@ button:disabled {
   .modal-content {
     width: 90%;
   }
+
+}
+
+
+.navbar-left {
+  width: 150px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.navbar-left h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-bottom: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-size: 16px;
+  display: block;
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #007bff;
+  color: white;
 }
