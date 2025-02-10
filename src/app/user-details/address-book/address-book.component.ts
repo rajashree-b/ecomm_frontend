@@ -40,7 +40,7 @@ export class AddressBookComponent implements OnInit {
       state: [''],
       country: [''],
       contact: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      countryCode: ['', Validators.required],
+      countryCode: [''],
       isDefault: [false],
     });
   }
@@ -67,33 +67,48 @@ export class AddressBookComponent implements OnInit {
     });
   }
 
-  toggleEdit(): void {
+  toggleEdit(isAdd: boolean): void {
     this.isEditing = true;
-    this.addressForm.enable();
-    this.addressForm.patchValue(this.placeholders);
+    if (isAdd) {
+      this.addressForm.reset();
+    } else {
+      this.addressForm.patchValue(this.placeholders);
+    }
   }
 
   saveDetails(): void {
     if (this.addressForm.valid) {
       const addressData = this.addressForm.value;
       const apiUrl = 'http://localhost:8080/auth/user/address';
-
-      this.http.post(apiUrl, addressData, { withCredentials: true }).subscribe({
-        next: () => {
-          this.toastr.success('Address saved successfully!', 'Success');
-          this.isEditing = false;
-          this.fetchAddressDetails();
-        
-        },
-        error: () => {
-          this.toastr.error('Failed to save address.', 'Error');
-        },
-      });
+  
+      if (this.placeholders.addressExists) {
+        this.http.put(apiUrl, addressData, { withCredentials: true }).subscribe({
+          next: (response: any) => {
+            this.toastr.success('Address updated successfully!', 'Success');
+            this.isEditing = false;
+            this.fetchAddressDetails();
+          },
+          error: () => {
+            this.toastr.error('Failed to update address.', 'Error');
+          },
+        });
+      } else {
+        this.http.post(apiUrl, addressData, { withCredentials: true }).subscribe({
+          next: (response: any) => {
+            this.toastr.success('Address added successfully!', 'Success');
+            this.isEditing = false;
+            this.fetchAddressDetails();
+          },
+          error: () => {
+            this.toastr.error('Failed to add address.', 'Error');
+          },
+        });
+      }
     } else {
       this.toastr.error('Please fill all required fields.', 'Error');
     }
   }
-
+  
   cancelEdit(): void {
     this.isEditing = false;
     this.addressForm.reset(this.placeholders);
@@ -104,11 +119,15 @@ export class AddressBookComponent implements OnInit {
       this.toastr.error('No address to remove.', 'Error');
       return;
     }
-
-    const apiUrl = `http://localhost:8080/auth/user/address/${this.placeholders.id}`;
-
-    this.http.delete(apiUrl, { withCredentials: true }).subscribe({
+  
+    const apiUrl = 'http://localhost:8080/auth/user/address';
+  
+    this.http.request('delete', apiUrl, {
+      body: { id: this.placeholders.id },
+      withCredentials: true,
+    }).subscribe({
       next: () => {
+        
         this.placeholders = {
           addressExists: false,
           id: null,
@@ -123,12 +142,13 @@ export class AddressBookComponent implements OnInit {
           countryCode: '',
           isDefault: false,
         };
+        this.addressForm.reset(this.placeholders);
         this.toastr.success('Address removed successfully!', 'Success');
-        this.fetchAddressDetails();
       },
       error: () => {
         this.toastr.error('Failed to remove address.', 'Error');
       },
     });
   }
+  
 }

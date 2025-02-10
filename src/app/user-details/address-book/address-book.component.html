@@ -1,6 +1,8 @@
-<div class="dropdown-content" *ngIf="!placeholders.addressExists">
+<button class="add-button" (click)="toggleEdit(true)">Add Address</button>
+
+<div *ngIf="!placeholders.addressExists">
   <p>No address details found. Please add your address.</p>
-  <button class="add-button" (click)="toggleEdit()">Add Address</button>
+  <!-- <button class="add-button" (click)="toggleEdit(true)">Add Address</button> -->
 </div>
 
 <div *ngIf="placeholders.addressExists && !isEditing">
@@ -14,7 +16,7 @@
     <p><strong>Country:</strong> {{ placeholders.country || 'N/A' }}</p>
     <p><strong>Contact:</strong> {{ placeholders.contact || 'N/A' }}</p>
     <div class="actions">
-      <button class="edit-button" (click)="toggleEdit()">Edit</button>
+      <button class="edit-button" (click)="toggleEdit(false)">Edit</button>
       <button class="delete-button" (click)="removeDetails()">Delete</button>
     </div>
   </div>
@@ -24,7 +26,6 @@
   <div class="modal-content">
     <h2>{{ placeholders.addressExists ? 'Edit Address Details' : 'Add Address Details' }}</h2>
     <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
-      
       <label>Address Line 1:</label>
       <input formControlName="addressLine1" type="text" />
       <div *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
@@ -43,7 +44,7 @@
       <label>Zip Code:</label>
       <input formControlName="zipcode" type="text" />
       <div *ngIf="addressForm.get('zipcode')?.invalid && addressForm.get('zipcode')?.touched">
-        Zip Code is required.
+        Zip Code is required and must be 5 or 6 digits.
       </div>
 
       <label>State:</label>
@@ -55,8 +56,11 @@
       <label>Contact:</label>
       <input formControlName="contact" type="text" />
       <div *ngIf="addressForm.get('contact')?.invalid && addressForm.get('contact')?.touched">
-        Contact is required.
+        Contact is required and must be 10 digits.
       </div>
+
+      <label>Country Code:</label>
+      <input formControlName="countryCode" type="text" />
 
       <div class="checkbox-container">
         <input formControlName="isDefault" type="checkbox" id="default" />
@@ -64,7 +68,7 @@
       </div>
 
       <div class="modal-actions">
-        <button type="submit"  [disabled]="addressForm.invalid">Save</button>
+        <button type="submit" [disabled]="addressForm.invalid">Save</button>
         <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button>
       </div>
     </form>
