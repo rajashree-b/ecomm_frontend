@@ -1,0 +1,61 @@
+<div class="dropdown-content" *ngIf="!isEditing">
+    <p><strong>First Name:</strong> {{ placeholders.firstName || ' ' }}</p>
+    <p><strong>Last Name:</strong> {{ placeholders.lastName || ' ' }}</p>
+    <p><strong>Email:</strong> {{ placeholders.email || ' ' }}</p>
+    <p><strong>Mobile:</strong> {{ placeholders.mobile || ' ' }}</p>
+    <p><strong>Username:</strong> {{ placeholders.userName || ' ' }}</p>
+    <button class="edit-button" (click)="toggleEdit()">Edit Details</button>
+  </div>
+  
+  <div class="modal" *ngIf="isEditing">
+    <div class="modal-content">
+      <h2>Edit User Details</h2>
+      <form [formGroup]="userDetailsForm" (ngSubmit)="saveDetails()">
+        <div>
+          <label>First Name:</label>
+          <input formControlName="firstName" type="text" />
+          <div *ngIf="userDetailsForm.get('firstName')?.invalid && userDetailsForm.get('firstName')?.touched">
+            First name is required.
+          </div>
+        </div>
+  
+        <div>
+          <label>Last Name:</label>
+          <input formControlName="lastName" type="text" />
+          <div *ngIf="userDetailsForm.get('lastName')?.invalid && userDetailsForm.get('lastName')?.touched">
+            Last name is required.
+          </div>
+        </div>
+  
+        <div>
+          <label>Email:</label>
+          <input formControlName="email" type="email" />
+          <div *ngIf="userDetailsForm.get('email')?.invalid && userDetailsForm.get('email')?.touched">
+            Enter a valid email.
+          </div>
+        </div>
+  
+        <div>
+          <label>Mobile:</label>
+          <input formControlName="mobile" type="text" />
+          <div *ngIf="userDetailsForm.get('mobile')?.invalid && userDetailsForm.get('mobile')?.touched">
+            Enter a valid 10-digit mobile number.
+          </div>
+        </div>
+  
+        <div>
+          <label>Username:</label>
+          <input formControlName="userName" type="text" />
+          <div *ngIf="userDetailsForm.get('userName')?.invalid && userDetailsForm.get('userName')?.touched">
+            Username is required.
+          </div>
+        </div>
+  
+        <div class="modal-actions">
+          <button type="submit" [disabled]="userDetailsForm.invalid">Save</button>
+          <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

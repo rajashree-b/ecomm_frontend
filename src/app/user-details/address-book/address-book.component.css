@@ -1,0 +1,182 @@
+/* General styles */
+p {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.dropdown-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px; /* Limit the width of the content */
+  margin: 20px auto; /* Center align */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #0056b3;
+}
+
+.dropdown-content strong {
+  color: blue;
+}
+
+/* Button styles */
+.edit-button,
+.add-button,
+.delete-button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.add-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 80%; 
+ box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h2 {
+  margin-top: 20px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top:20px;
+  
+}
+
+.modal-content label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.modal-content input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.modal-content input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.modal-actions button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.modal-actions .close-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.modal-actions .close-button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 600px) {
+  .dropdown-content,
+  .modal-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .edit-button,
+  .add-button,
+  .delete-button,
+  .modal-actions button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px; 
+  width: auto; 
+  height: 16px; 
+}
+
+.checkbox-container label {
+  font-size: 14px;
+  color: #333;
+}

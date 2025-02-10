@@ -1,0 +1,72 @@
+<div class="dropdown-content" *ngIf="!placeholders.addressExists">
+  <p>No address details found. Please add your address.</p>
+  <button class="add-button" (click)="toggleEdit()">Add Address</button>
+</div>
+
+<div *ngIf="placeholders.addressExists && !isEditing">
+  <div class="address-card">
+    <h3>Address Details</h3>
+    <p><strong>Address Line 1:</strong> {{ placeholders.addressLine1 || 'N/A' }}</p>
+    <p><strong>Address Line 2:</strong> {{ placeholders.addressLine2 || 'N/A' }}</p>
+    <p><strong>City:</strong> {{ placeholders.city || 'N/A' }}</p>
+    <p><strong>Zip Code:</strong> {{ placeholders.zipcode || 'N/A' }}</p>
+    <p><strong>State:</strong> {{ placeholders.state || 'N/A' }}</p>
+    <p><strong>Country:</strong> {{ placeholders.country || 'N/A' }}</p>
+    <p><strong>Contact:</strong> {{ placeholders.contact || 'N/A' }}</p>
+    <div class="actions">
+      <button class="edit-button" (click)="toggleEdit()">Edit</button>
+      <button class="delete-button" (click)="removeDetails()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" *ngIf="isEditing">
+  <div class="modal-content">
+    <h2>{{ placeholders.addressExists ? 'Edit Address Details' : 'Add Address Details' }}</h2>
+    <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
+      
+      <label>Address Line 1:</label>
+      <input formControlName="addressLine1" type="text" />
+      <div *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
+        Address Line 1 is required.
+      </div>
+
+      <label>Address Line 2:</label>
+      <input formControlName="addressLine2" type="text" />
+
+      <label>City:</label>
+      <input formControlName="city" type="text" />
+      <div *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
+        City is required.
+      </div>
+
+      <label>Zip Code:</label>
+      <input formControlName="zipcode" type="text" />
+      <div *ngIf="addressForm.get('zipcode')?.invalid && addressForm.get('zipcode')?.touched">
+        Zip Code is required.
+      </div>
+
+      <label>State:</label>
+      <input formControlName="state" type="text" />
+
+      <label>Country:</label>
+      <input formControlName="country" type="text" />
+
+      <label>Contact:</label>
+      <input formControlName="contact" type="text" />
+      <div *ngIf="addressForm.get('contact')?.invalid && addressForm.get('contact')?.touched">
+        Contact is required.
+      </div>
+
+      <div class="checkbox-container">
+        <input formControlName="isDefault" type="checkbox" id="default" />
+        <label for="default">Set as Default</label>
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit"  [disabled]="addressForm.invalid">Save</button>
+        <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
