@@ -11,10 +11,8 @@ export class AuthLoggingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     console.log('Request:', req);
-    // Add credentials to the request
     const clonedRequest = req.clone({
-      withCredentials: true,  // Set credentials flag to true if you want cookies to be sent with cross-origin requests
-    });
+      withCredentials: true,   });
 
     console.log('Cloned Request:', clonedRequest);
 

@@ -284,3 +284,22 @@ button:disabled {
   color: white;
  
 }
+
+
+.logout-button{
+  background-color: #5f33d8;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+  position:absolute;
+  right:10px;
+  top:30px
+  
+  
+}

@@ -23,10 +23,10 @@ bootstrapApplication(AppComponent, {
         positionClass: 'toast-top-right',
         // preventDuplicates: true,
         // closeButton: true,
-        timeOut: 5000,
+        timeOut: 3000,
         toastClass: 'custom-toast' 
         }
-      ) // Configure Toastr globally here  
+      ) 
     ),       
   ],
 }).catch((err) => console.error(err));

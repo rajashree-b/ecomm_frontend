@@ -1,5 +1,5 @@
 .toast-top-right {
-  right: 20px;
+  right: 150px;
   top:20px;
   position: fixed;
   z-index: 1050; 
@@ -14,14 +14,14 @@
   }
   
   .toast-success {
-    background-color: #4caf50 ; /* Green color */
+    background-color: #4caf50 ; 
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   }
   
   .toast-error {
-    background-color: #f44336 ; /* Red color */
+    background-color: #f44336 ; 
     color: white ;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
