@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,27 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-address-book',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgFor],
   templateUrl: './address-book.component.html',
   styleUrls: ['./address-book.component.css'],
 })
 export class AddressBookComponent implements OnInit {
   isEditing: boolean = false;
   isLoading: boolean = true;
-  placeholders: any = {
-    addressExists: false,
-    id: null,
-    userId: null,
-    addressLine1: '',
-    addressLine2: '',
-    city: '',
-    zipcode: null,
-    state: '',
-    country: '',
-    contact: '',
-    countryCode: '',
-    isDefault: false,
-  };
+  addresses: any[] = [];
+  selectedAddress: any = null;
 
   addressForm: FormGroup;
 
@@ -50,14 +38,10 @@ export class AddressBookComponent implements OnInit {
   }
 
   fetchAddressDetails() {
+    this.isLoading = true;
     this.http.get('http://localhost:8080/auth/user/addresses', { withCredentials: true }).subscribe({
       next: (response: any) => {
-        if (response.length > 0) {
-          this.placeholders = { ...response[0], addressExists: true };
-          this.addressForm.patchValue(response[0]);
-        } else {
-          this.placeholders.addressExists = false;
-        }
+        this.addresses = response;
         this.isLoading = false;
       },
       error: () => {
@@ -67,12 +51,14 @@ export class AddressBookComponent implements OnInit {
     });
   }
 
-  toggleEdit(isAdd: boolean): void {
+  toggleEdit(address?: any): void {
     this.isEditing = true;
-    if (isAdd) {
-      this.addressForm.reset();
+    if (address) {
+      this.selectedAddress = address;
+      this.addressForm.patchValue(address);
     } else {
-      this.addressForm.patchValue(this.placeholders);
+      this.selectedAddress = null;
+      this.addressForm.reset();
     }
   }
 
@@ -80,24 +66,26 @@ export class AddressBookComponent implements OnInit {
     if (this.addressForm.valid) {
       const addressData = this.addressForm.value;
       const apiUrl = 'http://localhost:8080/auth/user/address';
-  
-      if (this.placeholders.addressExists) {
-        this.http.put(apiUrl, addressData, { withCredentials: true }).subscribe({
-          next: (response: any) => {
+
+      if (this.selectedAddress) {
+        
+        this.http.put(apiUrl, { ...addressData, id: this.selectedAddress.id }, { withCredentials: true }).subscribe({
+          next: () => {
             this.toastr.success('Address updated successfully!', 'Success');
             this.isEditing = false;
-            this.fetchAddressDetails();
+            this.fetchAddressDetails(); 
           },
           error: () => {
             this.toastr.error('Failed to update address.', 'Error');
           },
         });
       } else {
+       
         this.http.post(apiUrl, addressData, { withCredentials: true }).subscribe({
-          next: (response: any) => {
+          next: () => {
             this.toastr.success('Address added successfully!', 'Success');
             this.isEditing = false;
-            this.fetchAddressDetails();
+            this.fetchAddressDetails(); 
           },
           error: () => {
             this.toastr.error('Failed to add address.', 'Error');
@@ -108,47 +96,23 @@ export class AddressBookComponent implements OnInit {
       this.toastr.error('Please fill all required fields.', 'Error');
     }
   }
-  
+
   cancelEdit(): void {
     this.isEditing = false;
-    this.addressForm.reset(this.placeholders);
+    this.addressForm.reset();
   }
 
-  removeDetails(): void {
-    if (!this.placeholders.id) {
-      this.toastr.error('No address to remove.', 'Error');
-      return;
-    }
-  
+  removeDetails(addressId: number): void {
     const apiUrl = 'http://localhost:8080/auth/user/address';
-  
-    this.http.request('delete', apiUrl, {
-      body: { id: this.placeholders.id },
-      withCredentials: true,
-    }).subscribe({
+
+    this.http.delete(apiUrl, { body: { id: addressId }, withCredentials: true }).subscribe({
       next: () => {
-        
-        this.placeholders = {
-          addressExists: false,
-          id: null,
-          userId: null,
-          addressLine1: '',
-          addressLine2: '',
-          city: '',
-          zipcode: null,
-          state: '',
-          country: '',
-          contact: '',
-          countryCode: '',
-          isDefault: false,
-        };
-        this.addressForm.reset(this.placeholders);
         this.toastr.success('Address removed successfully!', 'Success');
+        this.fetchAddressDetails(); 
       },
       error: () => {
         this.toastr.error('Failed to remove address.', 'Error');
       },
     });
   }
-  
 }

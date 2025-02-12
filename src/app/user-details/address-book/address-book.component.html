@@ -1,45 +1,51 @@
-<button class="add-button" (click)="toggleEdit(true)">Add Address</button>
+<div *ngIf="isLoading">Loading...</div>
 
-<div *ngIf="!placeholders.addressExists">
-  <p>No address details found. Please add your address.</p>
-  <!-- <button class="add-button" (click)="toggleEdit(true)">Add Address</button> -->
-</div>
+<div *ngIf="!isLoading">
+  <div *ngIf="addresses.length === 0">
+    <p>No address details found. Please add your address.</p>
+  </div>
 
-<div *ngIf="placeholders.addressExists && !isEditing">
-  <div class="address-card">
-    <h3>Address Details</h3>
-    <p><strong>Address Line 1:</strong> {{ placeholders.addressLine1 || 'N/A' }}</p>
-    <p><strong>Address Line 2:</strong> {{ placeholders.addressLine2 || 'N/A' }}</p>
-    <p><strong>City:</strong> {{ placeholders.city || 'N/A' }}</p>
-    <p><strong>Zip Code:</strong> {{ placeholders.zipcode || 'N/A' }}</p>
-    <p><strong>State:</strong> {{ placeholders.state || 'N/A' }}</p>
-    <p><strong>Country:</strong> {{ placeholders.country || 'N/A' }}</p>
-    <p><strong>Contact:</strong> {{ placeholders.contact || 'N/A' }}</p>
-    <div class="actions">
-      <button class="edit-button" (click)="toggleEdit(false)">Edit</button>
-      <button class="delete-button" (click)="removeDetails()">Delete</button>
+  
+    <div class="address-cards-container">
+      <div *ngFor="let address of addresses" class="address-card">
+        <h3>Address Details</h3>
+        <p><strong>Address Line 1:</strong> {{ address.addressLine1 || ' ' }}</p>
+        <p><strong>Address Line 2:</strong> {{ address.addressLine2 || ' ' }}</p>
+        <p><strong>City:</strong> {{ address.city || ' ' }}</p>
+        <p><strong>Zip Code:</strong> {{ address.zipcode || ' ' }}</p>
+        <p><strong>State:</strong> {{ address.state || ' ' }}</p>
+        <p><strong>Country:</strong> {{ address.country || ' ' }}</p>
+        <p><strong>Contact:</strong> {{ address.contact || ' ' }}</p>
+        <div class="actions">
+          <button class="edit-button" (click)="toggleEdit(address)">Edit</button>
+          <button class="delete-button" (click)="removeDetails(address.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div>
+      <button class="add-button" (click)="toggleEdit()">Add Address</button>
     </div>
   </div>
-</div>
+  
+  <div class="modal" *ngIf="isEditing">
+    <div class="modal-content">
+      <h2>{{ selectedAddress ? 'Edit Address Details' : 'Add Address Details' }}</h2>
+      <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
+        <label>Address Line 1:</label>
+        <input formControlName="addressLine1" type="text" />
+        <div *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
+          Address Line 1 is required.
+        </div>
 
-<div class="modal" *ngIf="isEditing">
-  <div class="modal-content">
-    <h2>{{ placeholders.addressExists ? 'Edit Address Details' : 'Add Address Details' }}</h2>
-    <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
-      <label>Address Line 1:</label>
-      <input formControlName="addressLine1" type="text" />
-      <div *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
-        Address Line 1 is required.
-      </div>
+        <label>Address Line 2:</label>
+        <input formControlName="addressLine2" type="text" />
 
-      <label>Address Line 2:</label>
-      <input formControlName="addressLine2" type="text" />
-
-      <label>City:</label>
-      <input formControlName="city" type="text" />
-      <div *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
-        City is required.
-      </div>
+        <label>City:</label>
+        <input formControlName="city" type="text" />
+        <div *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
+          City is required.
+        </div>
 
       <label>Zip Code:</label>
       <input formControlName="zipcode" type="text" />

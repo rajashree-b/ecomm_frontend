@@ -1,18 +1,17 @@
-/* General styles */
 p {
-  font-size: 16px;
+  font-size: 1rem; 
   color: #333;
-  margin: 10px 0;
+  margin: 0.625rem 0;
 }
 
 .dropdown-content {
-  padding: 20px;
+  padding: 1.25rem;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  max-width: 600px; /* Limit the width of the content */
-  margin: 20px auto; /* Center align */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  max-width: 37.5rem; /* 600px */
+  margin: 1.25rem auto;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
   color: #0056b3;
 }
 
@@ -20,15 +19,17 @@ p {
   color: blue;
 }
 
-/* Button styles */
+
+
+
 .edit-button,
 .add-button,
 .delete-button {
   display: inline-block;
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 0.625rem 0.9375rem;
+  font-size: 0.875rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -75,36 +76,37 @@ p {
 
 .modal-content {
   background-color: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  max-width: 500px;
-  width: 80%; 
- box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.9375rem;
+  border-radius: 0.5rem;
+  max-width: 31.25rem; /* 500px */
+  width: 80%;
+  box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal-content h2 {
-  margin-top: 20px;
+  margin-top: 1.25rem;
   color: #333;
   text-align: center;
-  margin-bottom: 20px;
-  padding-top:20px;
-  
+  margin-bottom: 1.25rem;
+  padding-top: 1.25rem;
 }
 
 .modal-content label {
   display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 0.875rem;
+  margin-bottom: 0.3125rem;
   color: #555;
 }
 
 .modal-content input {
   width: 90%;
-  padding: 10px;
+  padding: 0.625rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  margin-bottom: 0.9375rem;
+  font-size: 0.875rem;
 }
 
 .modal-content input:focus {
@@ -118,10 +120,10 @@ p {
 }
 
 .modal-actions button {
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 0.625rem 0.9375rem;
+  font-size: 0.875rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -144,39 +146,68 @@ p {
   background-color: #c82333;
 }
 
-@media (max-width: 600px) {
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.9375rem;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 0.625rem;
+  width: auto;
+  height: 1rem;
+}
+
+.checkbox-container label {
+  font-size: 0.875rem;
+  color: #333;
+}
+
+@media (max-width: 37.5rem) { 
   .dropdown-content,
   .modal-content {
-    padding: 15px;
+    padding: 0.9375rem;
     max-width: 90%;
   }
 
   p {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   .edit-button,
   .add-button,
   .delete-button,
   .modal-actions button {
-    font-size: 12px;
-    padding: 6px 12px;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
   }
 }
 
-.checkbox-container {
+.address-cards-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+  flex-wrap: wrap; 
+  gap: 1rem; 
 }
 
-.checkbox-container input[type="checkbox"] {
-  margin-right: 10px; 
-  width: auto; 
-  height: 16px; 
+
+.address-card {
+  flex: 1 1 calc(33.333% - 1rem); 
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
 }
 
-.checkbox-container label {
-  font-size: 14px;
-  color: #333;
+@media (max-width: 768px) {
+  .address-card {
+    flex: 1 1 calc(50% - 1rem); 
+  }
+}
+
+@media (max-width: 480px) {
+  .address-card {
+    flex: 1 1 100%; 
+  }
 }
