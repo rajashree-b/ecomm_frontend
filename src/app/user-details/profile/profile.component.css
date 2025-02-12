@@ -1,4 +1,3 @@
-/* Header Styling */
 h1:first-of-type {
     font-size: 2rem;
     color: #007bff;
@@ -19,7 +18,6 @@ h1:first-of-type {
     width: fit-content; 
   }
   
-  /* Form Styling */
   form {
     max-width: 500px;
     margin: 20px auto;
@@ -72,7 +70,6 @@ h1:first-of-type {
     margin-top: 4px;
   }
   
-  /* Button Styling */
   button[type="submit"] {
     display: inline-block;
     width: 100%;
@@ -96,7 +93,6 @@ h1:first-of-type {
     cursor: not-allowed;
   }
   
-  /* Edit Button Styling */
   button.edit-button {
     background-color: #007bff;
     color: white;
@@ -119,7 +115,6 @@ h1:first-of-type {
     background-color: #003d80;
   }
   
-  /* Modal Styling */
   .modal {
     position: fixed;
     top: 0;
@@ -144,9 +139,9 @@ h1:first-of-type {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+    color: #7e3ce7;
   }
   
-  /* Dropdown Styling */
   
   .dropdown {
     margin-bottom: 20px;
@@ -214,7 +209,7 @@ h1:first-of-type {
   
   
   .close-button{
-    background-color: #157b88;
+    background-color: #4631c2;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -225,7 +220,6 @@ h1:first-of-type {
     transition: all 0.3s ease;
     margin-right: 10px;
   }
-  /* Responsive Design */
   @media (max-width: 768px) {
     form {
       padding: 16px;

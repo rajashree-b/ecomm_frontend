@@ -8,7 +8,7 @@
   
     <div class="address-cards-container">
       <div *ngFor="let address of addresses" class="address-card">
-        <h3>Address Details</h3>
+        <!-- <h3>Address Details</h3> -->
         <p><strong>Address Line 1:</strong> {{ address.addressLine1 || ' ' }}</p>
         <p><strong>Address Line 2:</strong> {{ address.addressLine2 || ' ' }}</p>
         <p><strong>City:</strong> {{ address.city || ' ' }}</p>
@@ -16,6 +16,7 @@
         <p><strong>State:</strong> {{ address.state || ' ' }}</p>
         <p><strong>Country:</strong> {{ address.country || ' ' }}</p>
         <p><strong>Contact:</strong> {{ address.contact || ' ' }}</p>
+        <p><strong>Country Code:</strong>{{address.countryCode || ' '}}</p>
         <div class="actions">
           <button class="edit-button" (click)="toggleEdit(address)">Edit</button>
           <button class="delete-button" (click)="removeDetails(address.id)">Delete</button>
@@ -34,7 +35,7 @@
       <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
         <label>Address Line 1:</label>
         <input formControlName="addressLine1" type="text" />
-        <div *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
+        <div class="error-message" *ngIf="addressForm.get('addressLine1')?.invalid && addressForm.get('addressLine1')?.touched">
           Address Line 1 is required.
         </div>
 
@@ -43,13 +44,13 @@
 
         <label>City:</label>
         <input formControlName="city" type="text" />
-        <div *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
+        <div class="error-message" *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched">
           City is required.
         </div>
 
       <label>Zip Code:</label>
       <input formControlName="zipcode" type="text" />
-      <div *ngIf="addressForm.get('zipcode')?.invalid && addressForm.get('zipcode')?.touched">
+      <div class="error-message" *ngIf="addressForm.get('zipcode')?.invalid && addressForm.get('zipcode')?.touched">
         Zip Code is required and must be 5 or 6 digits.
       </div>
 
@@ -61,7 +62,7 @@
 
       <label>Contact:</label>
       <input formControlName="contact" type="text" />
-      <div *ngIf="addressForm.get('contact')?.invalid && addressForm.get('contact')?.touched">
+      <div class="error-message" *ngIf="addressForm.get('contact')?.invalid && addressForm.get('contact')?.touched">
         Contact is required and must be 10 digits.
       </div>
 

@@ -16,6 +16,7 @@ export class AddressBookComponent implements OnInit {
   isLoading: boolean = true;
   addresses: any[] = [];
   selectedAddress: any = null;
+  userId: number | null = null;  
 
   addressForm: FormGroup;
 
@@ -42,6 +43,9 @@ export class AddressBookComponent implements OnInit {
     this.http.get('http://localhost:8080/auth/user/addresses', { withCredentials: true }).subscribe({
       next: (response: any) => {
         this.addresses = response;
+        if (this.addresses.length > 0) {
+          this.userId = this.addresses[0].userId; 
+        }
         this.isLoading = false;
       },
       error: () => {
@@ -63,29 +67,27 @@ export class AddressBookComponent implements OnInit {
   }
 
   saveDetails(): void {
-    if (this.addressForm.valid) {
-      const addressData = this.addressForm.value;
+    if (this.addressForm.valid && this.userId) {
+      const addressData = { ...this.addressForm.value, userId: this.userId };
       const apiUrl = 'http://localhost:8080/auth/user/address';
 
       if (this.selectedAddress) {
-        
         this.http.put(apiUrl, { ...addressData, id: this.selectedAddress.id }, { withCredentials: true }).subscribe({
           next: () => {
             this.toastr.success('Address updated successfully!', 'Success');
             this.isEditing = false;
-            this.fetchAddressDetails(); 
+            this.fetchAddressDetails();
           },
           error: () => {
             this.toastr.error('Failed to update address.', 'Error');
           },
         });
       } else {
-       
         this.http.post(apiUrl, addressData, { withCredentials: true }).subscribe({
           next: () => {
             this.toastr.success('Address added successfully!', 'Success');
             this.isEditing = false;
-            this.fetchAddressDetails(); 
+            this.fetchAddressDetails();
           },
           error: () => {
             this.toastr.error('Failed to add address.', 'Error');
@@ -103,16 +105,20 @@ export class AddressBookComponent implements OnInit {
   }
 
   removeDetails(addressId: number): void {
-    const apiUrl = 'http://localhost:8080/auth/user/address';
+    if (this.userId) {
+      const apiUrl = 'http://localhost:8080/auth/user/address';
 
-    this.http.delete(apiUrl, { body: { id: addressId }, withCredentials: true }).subscribe({
-      next: () => {
-        this.toastr.success('Address removed successfully!', 'Success');
-        this.fetchAddressDetails(); 
-      },
-      error: () => {
-        this.toastr.error('Failed to remove address.', 'Error');
-      },
-    });
+      this.http.delete(apiUrl, { body: { id: addressId, userId: this.userId }, withCredentials: true }).subscribe({
+        next: () => {
+          this.toastr.success('Address removed successfully!', 'Success');
+          this.fetchAddressDetails();
+        },
+        error: () => {
+          this.toastr.error('Failed to remove address.', 'Error');
+        },
+      });
+    } else {
+      this.toastr.error('User ID is missing. Unable to delete address.', 'Error');
+    }
   }
 }
