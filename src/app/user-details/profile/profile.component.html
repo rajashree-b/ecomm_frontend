@@ -9,7 +9,10 @@
   
   <div class="modal" *ngIf="isEditing">
     <div class="modal-content">
-      <h2>Edit User Details</h2>
+      <div class="modal-view">
+      <h2>Edit User Details </h2>
+      <button type="button" (click)="cancelEdit()" class="close-button">&#10060;</button>
+    </div>
       <form [formGroup]="userDetailsForm" (ngSubmit)="saveDetails()">
         <div>
           <label>First Name:</label>
@@ -52,8 +55,7 @@
         </div>
   
         <div class="modal-actions">
-          <button type="submit" [disabled]="userDetailsForm.invalid">Save</button>
-          <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button>
+          <button type="submit"  [disabled]="userDetailsForm.invalid">Save</button>
         </div>
       </form>
     </div>

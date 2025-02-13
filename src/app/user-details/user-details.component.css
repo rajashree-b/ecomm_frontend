@@ -129,6 +129,7 @@ button.edit-button:active {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -137,6 +138,7 @@ button.edit-button:active {
   border-radius: 5px;
   width: 400px;
   max-width: 100%;
+  overflow-y: auto;
 }
 
 .modal-actions {

@@ -93,12 +93,15 @@ p {
 
 
 
-.modal-content h2 {
-  margin-top: 1.25rem;
-  color: #333;
+.modal-content p {
+  /* margin-top: 1.25rem; */
+  color: #28c584;
   text-align: center;
-  margin-bottom: 1.25rem;
-  padding-top: 1.25rem;
+  font-size: 24px;
+  /* margin-bottom: 1.25rem; */
+  /* padding-top: 1.25rem; */
+  font-weight: 600;
+  
 }
 
 .modal-content label {
@@ -150,6 +153,11 @@ p {
   background-color: #dc3545;
   color: #fff;
 }
+
+.modal-view{
+  display: flex;
+  justify-content: space-between;
+  }
 
 .modal-actions .close-button:hover {
   background-color: #c82333;
@@ -228,4 +236,22 @@ p {
   .address-card {
     flex: 1 1 100%; 
   }
+}
+
+ 
+.close-button{
+  /* background-color: #4631c2; */
+  /* color: white; */
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding-left:10px;
+  padding-right:10px;
+  transition: all 0.3s ease;
+  border: 2px solid #007bff;
+  border-color: #007bff;
+  /* margin-right: 100px; */
+  /* justify-content: right */
 }

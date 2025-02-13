@@ -81,8 +81,8 @@ export class ProfileComponent implements OnInit {
   saveDetails(): void {
     if (this.userDetailsForm.valid) {
       this.http
-        .post(
-          'http://localhost:8080/auth/user/update/userProfile',
+        .put(
+          'http://localhost:8080/auth/user/userProfile',
           this.userDetailsForm.value,
           {
             withCredentials: true,
@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit {
         .subscribe({
           next: () => {
             this.toastr.success('Details updated successfully!', 'Success');
+            console.log("updated successfully")
             this.isEditing = false;
 
             this.placeholders = this.userDetailsForm.value;

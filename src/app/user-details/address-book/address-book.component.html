@@ -17,6 +17,7 @@
         <p><strong>Country:</strong> {{ address.country || ' ' }}</p>
         <p><strong>Contact:</strong> {{ address.contact || ' ' }}</p>
         <p><strong>Country Code:</strong>{{address.countryCode || ' '}}</p>
+        <p><strong>Default</strong>{{address.isDefault}}</p>
         <div class="actions">
           <button class="edit-button" (click)="toggleEdit(address)">Edit</button>
           <button class="delete-button" (click)="removeDetails(address.id)">Delete</button>
@@ -31,7 +32,10 @@
   
   <div class="modal" *ngIf="isEditing">
     <div class="modal-content">
-      <h2>{{ selectedAddress ? 'Edit Address Details' : 'Add Address Details' }}</h2>
+      <div class="modal-view">
+      <p>{{ selectedAddress ? 'Edit Address Details' : 'Add Address Details' }}</p>
+      <button type="button" (click)="cancelEdit()" class="close-button">&#10060;</button>
+    </div>
       <form [formGroup]="addressForm" (ngSubmit)="saveDetails()">
         <label>Address Line 1:</label>
         <input formControlName="addressLine1" type="text" />
@@ -76,7 +80,7 @@
 
       <div class="modal-actions">
         <button type="submit" [disabled]="addressForm.invalid">Save</button>
-        <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button>
+        <!-- <button type="button" (click)="cancelEdit()" class="close-button">Cancel</button> -->
       </div>
     </form>
   </div>
