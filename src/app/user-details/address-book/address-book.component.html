@@ -8,7 +8,9 @@
   
     <div class="address-cards-container">
       <div *ngFor="let address of addresses" class="address-card">
-        <!-- <h3>Address Details</h3> -->
+         <div class="default-title" *ngIf="address.default">
+            <h3>Default</h3>
+         </div>
         <p><strong>Address Line 1:</strong> {{ address.addressLine1 || ' ' }}</p>
         <p><strong>Address Line 2:</strong> {{ address.addressLine2 || ' ' }}</p>
         <p><strong>City:</strong> {{ address.city || ' ' }}</p>
@@ -17,7 +19,6 @@
         <p><strong>Country:</strong> {{ address.country || ' ' }}</p>
         <p><strong>Contact:</strong> {{ address.contact || ' ' }}</p>
         <p><strong>Country Code:</strong>{{address.countryCode || ' '}}</p>
-        <p><strong>Default</strong>{{address.isDefault}}</p>
         <div class="actions">
           <button class="edit-button" (click)="toggleEdit(address)">Edit</button>
           <button class="delete-button" (click)="removeDetails(address.id)">Delete</button>
@@ -74,7 +75,8 @@
       <input formControlName="countryCode" type="text" />
 
       <div class="checkbox-container">
-        <input formControlName="isDefault" type="checkbox" id="default" />
+        <input formControlName="default" type="checkbox" id="default"
+        />
         <label for="default">Set as Default</label>
       </div>
 

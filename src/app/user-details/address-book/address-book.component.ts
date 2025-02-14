@@ -30,7 +30,7 @@ export class AddressBookComponent implements OnInit {
       country: [''],
       contact: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       countryCode: [''],
-      isDefault: [false],
+      default: [false, ],
     });
   }
 
@@ -45,6 +45,8 @@ export class AddressBookComponent implements OnInit {
         this.addresses = response;
         if (this.addresses.length > 0) {
           this.userId = this.addresses[0].userId; 
+          const defaultAddress=this.addresses.find(addr=>addr.isDefault);
+          
         }
         this.isLoading = false;
       },
@@ -60,15 +62,25 @@ export class AddressBookComponent implements OnInit {
     if (address) {
       this.selectedAddress = address;
       this.addressForm.patchValue(address);
+      if (address.default) {
+        this.addressForm.get('default')?.disable();
+      } else {
+        this.addressForm.get('default')?.enable();
+      }
     } else {
       this.selectedAddress = null;
       this.addressForm.reset();
     }
   }
 
+
   saveDetails(): void {
     if (this.addressForm.valid && this.userId) {
       const addressData = { ...this.addressForm.value, userId: this.userId };
+      if (this.addresses.length === 0) {
+        addressData.isDefault = true;
+      }
+  
       const apiUrl = 'http://localhost:8080/auth/user/address';
 
       if (this.selectedAddress) {
