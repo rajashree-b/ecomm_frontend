@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
 
   fetchUserProfile(): void {
     this.http
-      .get('http://localhost:8080/auth/user/userProfile', {
+      .get('http://localhost:8080/user/userProfile', {
         withCredentials: true,
         responseType: 'text',
       })
@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
     if (this.userDetailsForm.valid) {
       this.http
         .put(
-          'http://localhost:8080/auth/user/userProfile',
+          'http://localhost:8080/user/userProfile',
           this.userDetailsForm.value,
           {
             withCredentials: true,

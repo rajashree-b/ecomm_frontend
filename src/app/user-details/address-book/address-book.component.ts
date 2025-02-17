@@ -30,7 +30,7 @@ export class AddressBookComponent implements OnInit {
       country: [''],
       contact: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       countryCode: [''],
-      default: [false, ],
+      default: [false],
     });
   }
 
@@ -40,13 +40,11 @@ export class AddressBookComponent implements OnInit {
 
   fetchAddressDetails() {
     this.isLoading = true;
-    this.http.get('http://localhost:8080/auth/user/addresses', { withCredentials: true }).subscribe({
+    this.http.get('http://localhost:8080/user/addresses', { withCredentials: true }).subscribe({
       next: (response: any) => {
         this.addresses = response;
         if (this.addresses.length > 0) {
-          this.userId = this.addresses[0].userId; 
-          const defaultAddress=this.addresses.find(addr=>addr.isDefault);
-          
+          this.userId = this.addresses[0].userId;           
         }
         this.isLoading = false;
       },
@@ -64,7 +62,8 @@ export class AddressBookComponent implements OnInit {
       this.addressForm.patchValue(address);
       if (address.default) {
         this.addressForm.get('default')?.disable();
-      } else {
+      }
+     else {
         this.addressForm.get('default')?.enable();
       }
     } else {
@@ -75,13 +74,13 @@ export class AddressBookComponent implements OnInit {
 
 
   saveDetails(): void {
-    if (this.addressForm.valid && this.userId) {
+    if (this.addressForm.valid ) {
       const addressData = { ...this.addressForm.value, userId: this.userId };
       if (this.addresses.length === 0) {
         addressData.isDefault = true;
       }
   
-      const apiUrl = 'http://localhost:8080/auth/user/address';
+      const apiUrl = 'http://localhost:8080/user/address';
 
       if (this.selectedAddress) {
         this.http.put(apiUrl, { ...addressData, id: this.selectedAddress.id }, { withCredentials: true }).subscribe({
@@ -97,6 +96,7 @@ export class AddressBookComponent implements OnInit {
       } else {
         this.http.post(apiUrl, addressData, { withCredentials: true }).subscribe({
           next: () => {
+            this.addressForm.get('default')?.enable();
             this.toastr.success('Address added successfully!', 'Success');
             this.isEditing = false;
             this.fetchAddressDetails();
@@ -106,7 +106,8 @@ export class AddressBookComponent implements OnInit {
           },
         });
       }
-    } else {
+    }
+     else {
       this.toastr.error('Please fill all required fields.', 'Error');
     }
   }
@@ -118,7 +119,7 @@ export class AddressBookComponent implements OnInit {
 
   removeDetails(addressId: number): void {
     if (this.userId) {
-      const apiUrl = 'http://localhost:8080/auth/user/address';
+      const apiUrl = 'http://localhost:8080/user/address';
 
       this.http.delete(apiUrl, { body: { id: addressId, userId: this.userId }, withCredentials: true }).subscribe({
         next: () => {
