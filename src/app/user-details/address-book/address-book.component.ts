@@ -40,7 +40,7 @@ export class AddressBookComponent implements OnInit {
 
   fetchAddressDetails() {
     this.isLoading = true;
-    this.http.get('http://localhost:8080/auth/user/addresses', { withCredentials: true }).subscribe({
+    this.http.get('http://localhost:8080/user/addresses', { withCredentials: true }).subscribe({
       next: (response: any) => {
         this.addresses = response;
         if (this.addresses.length > 0) {
@@ -81,7 +81,7 @@ export class AddressBookComponent implements OnInit {
         addressData.isDefault = true;
       }
   
-      const apiUrl = 'http://localhost:8080/auth/user/address';
+      const apiUrl = 'http://localhost:8080/user/address';
 
       if (this.selectedAddress) {
         this.http.put(apiUrl, { ...addressData, id: this.selectedAddress.id }, { withCredentials: true }).subscribe({
@@ -118,7 +118,7 @@ export class AddressBookComponent implements OnInit {
 
   removeDetails(addressId: number): void {
     if (this.userId) {
-      const apiUrl = 'http://localhost:8080/auth/user/address';
+      const apiUrl = 'http://localhost:8080/user/address';
 
       this.http.delete(apiUrl, { body: { id: addressId, userId: this.userId }, withCredentials: true }).subscribe({
         next: () => {
