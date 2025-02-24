@@ -1,18 +1,19 @@
- <h1>User Details</h1>
 
 <div class="navbar-left">
   <ul class="nav-links">
-    <li><a  (click)="showComponent('profile')">User Details</a></li>
-    <li><a (click)="showComponent('addressBook')">Address Details</a></li>
-    <li><a  (click)="showComponent('manageAccount')">Manage Account</a></li>
+    <li><a  (click)="showComponent('profile')" [class.active]="isActive('profile')">User Details</a></li>
+    <li><a (click)="showComponent('addressBook')" [class.active]="isActive('addressBook')">Address Details</a></li>
+    <li><a  (click)="showComponent('manageAccount')" [class.active]="isActive('manageAccount')">Manage Account</a></li>
   </ul>
 </div>
 
 <div class="content">
-  <app-profile *ngIf="currentComponent === 'profile'"></app-profile>
+  <app-profile *ngIf="currentComponent === 'profile'">
+    
+  </app-profile>
   
   <app-address-book *ngIf="currentComponent === 'addressBook'"></app-address-book>
-  
+
   <app-manage-account *ngIf="currentComponent === 'manageAccount'"></app-manage-account>
 
 </div>

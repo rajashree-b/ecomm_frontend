@@ -29,7 +29,7 @@ export class AddressBookComponent implements OnInit {
       state: [''],
       country: [''],
       contact: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      countryCode: [''],
+      countryCode: ['',Validators.required,],
       default: [false],
     });
   }
@@ -130,7 +130,10 @@ export class AddressBookComponent implements OnInit {
           this.toastr.error('Failed to remove address.', 'Error');
         },
       });
-    } else {
+    }
+    
+    
+    else {
       this.toastr.error('User ID is missing. Unable to delete address.', 'Error');
     }
   }

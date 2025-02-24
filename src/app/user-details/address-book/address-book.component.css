@@ -210,40 +210,44 @@ p {
 
 .address-cards-container {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 1rem; 
+  flex-wrap: wrap;
+  gap: 1rem;
+  
 }
 
-.address-cards-container p{
-  color:#007bff;
+.address-cards-container p {
+  color: #007bff;
 }
 
-.address-cards-container p strong{
-  color:#c524a2;
+.address-cards-container p strong {
+  color: #c524a2;
 }
-
-
 
 .address-card {
-  flex: 1 1 calc(33.333% - 1rem); 
+  width: 350px; /* Fixed width */
+  height: 350px; /* Fixed height */
   box-sizing: border-box;
   padding: 1rem;
-  
   border: 1px solid #ddd;
   border-radius: 0.5rem;
   background-color: #fff;
   box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+  /* text-align: center; */
 }
 
+/* Adjusts layout on smaller screens */
 @media (max-width: 768px) {
   .address-card {
-    flex: 1 1 calc(50% - 1rem); 
+    width: 260px;
+    height: 170px;
   }
 }
 
 @media (max-width: 480px) {
   .address-card {
-    flex: 1 1 100%; 
+    width: 90%; /* Keeps it smaller than full width */
+    max-width: 280px; /* Prevents excessive stretching */
+    height: auto; /* Allows height to adjust based on content */
   }
 }
 
@@ -280,3 +284,39 @@ p {
 
 
 
+h1{
+  font-size: 2rem;
+  color: #007bff;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+
+.padding-class{
+  padding-top: 33px;
+}
+
+
+
+.loader
+{
+  border:14px solid #f3f3f3;
+  border-top: 14px solid #3498db;
+  border-radius: 50%;
+  width:60px;
+  height:60px;
+  animation:spin 6s linear infinite;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+  
+}

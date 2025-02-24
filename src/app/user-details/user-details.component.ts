@@ -43,6 +43,15 @@ export class UserDetailsComponent{
   
   showComponent(componentName: string) {
     this.currentComponent = componentName;  
+
   }
+
+
+  isActive(component: string): boolean {
+    return this.currentComponent === component;
+  }
+
+
+
 
 }
