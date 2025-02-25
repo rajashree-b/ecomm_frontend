@@ -13,6 +13,7 @@
             <h3>Default</h3>
         
          </div>
+         <div [class.padding-class]="!address.default"></div>
         <p ><strong>Address Line 1:</strong> {{ address.addressLine1 || ' ' }}</p>
         <p><strong>Address Line 2:</strong> {{ address.addressLine2 || ' ' }}</p>
         <p><strong>City:</strong> {{ address.city || ' ' }}</p>
@@ -21,7 +22,7 @@
         <p><strong>Country:</strong> {{ address.country || ' ' }}</p>
         <p><strong>Contact:</strong> {{ address.contact || ' ' }}</p>
         <p><strong>Country Code:</strong>{{address.countryCode || ' '}}</p>
-        <div class="card-actions"  [class.padding-class]="!address.default">
+        <div class="card-actions"  >
           <button class="edit-button" (click)="toggleEdit(address)">Edit</button>
           <span>      </span>
           <button class="delete-button" (click)="removeDetails(address.id)">Delete</button>
@@ -37,7 +38,6 @@
   <div class="modal" *ngIf="isEditing">
     <div class="modal-content">
       <div class="modal-view">
-        <div>
       <p>{{ selectedAddress ? 'Edit Address Details' : 'Add Address Details' }}</p>
       <button type="button" (click)="cancelEdit()" class="close-button">&#10060;</button>
     </div>

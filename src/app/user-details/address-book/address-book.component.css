@@ -160,10 +160,6 @@ p {
   color: #fff;
 }
 
-.modal-view{
-  display: flex;
-  justify-content: space-between;
-  }
 
 .modal-actions .close-button:hover {
   background-color: #c82333;
@@ -172,7 +168,7 @@ p {
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 0.9375rem;
+  /* margin-bottom: 0.9375rem; */
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -187,8 +183,8 @@ p {
 }
 
 @media (max-width: 37.5rem) { 
-  .dropdown-content,
-  .modal-content {
+  .dropdown-content
+{
     padding: 0.9375rem;
     max-width: 90%;
   }
@@ -213,6 +209,13 @@ p {
   flex-wrap: wrap;
   gap: 1rem;
   
+}
+
+
+.modal-view
+{
+  display: flex;
+  justify-content: space-between;
 }
 
 .address-cards-container p {
@@ -266,7 +269,8 @@ p {
   border: 2px solid #007bff;
   border-color: #007bff;
   /* margin-right: 100px; */
-  /* justify-content: right */
+
+  justify-content: right
 }
 
 
