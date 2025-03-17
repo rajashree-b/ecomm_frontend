@@ -5,11 +5,12 @@ import { NgIf } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { HomeComponent } from "../home/home.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, HomeComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -32,7 +33,7 @@ export class LoginComponent {
       next: () => {
         // alert('Login successful!');
         this.toastr.success('Login successful!','Success');
-        this.router.navigate(['/user-details']);
+        this.router.navigate(['/new-home']);
       },
       error: () => {
         this.toastr.error('Invalid credentials.Please try again','Error');

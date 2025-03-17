@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 export class UserDetailsComponent{
 
 
-  currentComponent: string = 'profile'; 
+  currentComponent=''; 
 
   constructor(private http: HttpClient,private router:Router,private toastr:ToastrService){
 

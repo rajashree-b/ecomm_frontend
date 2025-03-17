@@ -1,0 +1,134 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 20vh; */
+    background-color: white;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: hwb(281 6% 41% / 0.795); 
+    margin-top: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    letter-spacing: 0.3px;
+  }
+
+
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left:184px;
+    width: 100%;
+    padding: 10px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .logo {
+    height: 50px;
+  }
+
+
+  .cart
+  {
+    padding: 1px;
+    margin-bottom:-10px;
+    padding-right:5px;
+    overflow: hidden;
+    width:30px;
+   
+}
+  .search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .search-bar input {
+    border: none;
+    padding: 10px;
+    outline: none;
+  }
+  .search-bar button {
+    border: none;
+    background: transparent;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .login-btn {
+    background: #0070f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.cart-image{
+  cursor:pointer
+}
+
+  /* Basic Navbar Styles */
+.navbar-left {
+  display: flex;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.hamburger {
+  display: none; /* Hidden by default */
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .navbar-left {
+      display: none; /* Hide navbar links */
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+  }
+
+  .navbar-left.active {
+      display: flex; /* Show navbar when hamburger is clicked */
+  }
+
+  .hamburger {
+      display: block; /* Show hamburger icon */
+  }
+}
+
+/* Menu Icon */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: auto;  /* Aligns to the right */
+  padding: 10px;
+}
+
+.menu-icon div {
+  width: 20px;
+  height: 3px;
+  background-color: black;
+  margin: 3px 0;
+}
+

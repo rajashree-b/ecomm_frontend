@@ -1,0 +1,42 @@
+<div class="container">
+
+
+  <!-- <div class="navbar-left" [ngClass]="{ 'active': isNavbarOpen }">
+    <ul class="nav-links">
+        <li><a (click)="showComponent('profile')" [class.active]="isActive('profile')">User Details</a></li>
+        <li><a (click)="showComponent('addressBook')" [class.active]="isActive('addressBook')">Address Details</a></li>
+        <li><a (click)="showComponent('manageAccount')" [class.active]="isActive('manageAccount')">Manage Account</a></li>
+    </ul>
+</div>
+
+<div class="content">
+    <app-profile *ngIf="currentComponent === 'profile'"></app-profile>
+    <app-address-book *ngIf="currentComponent === 'addressBook'"></app-address-book>
+    <app-manage-account *ngIf="currentComponent === 'manageAccount'"></app-manage-account>
+</div> -->
+
+<!-- <div>
+    <button class="logout-button" (click)="logout()">Logout</button>
+</div> -->
+  <header>
+      <img src="assets/image.png" alt="Shopify Logo" class="logo"> 
+      <div class="heading">
+          <h1>Shopify</h1>
+      </div>
+
+      <div class="search-bar">
+          <input type="text" placeholder="Search for any products..." />
+          <img src="assets/icons8-google-web-search-26.png" alt="search-button" />
+          <button><i class="fas fa-search"></i></button>
+      </div>
+
+      <div class="cart-image">
+          <img src="assets/shopping-cart.png" alt="cart image" class="cart" />
+          <button (click)="router.navigate(['/login'])" class="login-btn">Logout</button>
+      </div>
+
+ 
+  </header>
+
+  
+</div>

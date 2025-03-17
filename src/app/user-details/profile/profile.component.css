@@ -22,9 +22,9 @@ h1:first-of-type {
     max-width: 500px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(211, 210, 210);
     border-radius: 8px;
-    background-color: #f5efef;
+    background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -66,7 +66,7 @@ h1:first-of-type {
   
   div > div {
     color: #7e3ce7;
-    font-size: 12px;
+    font-size: 18px;
     margin-top: 4px;
   }
   
@@ -166,7 +166,6 @@ h1:first-of-type {
   .dropdown-content {
     position: absolute; 
     top: 80px;
-    left: 240px; 
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 15px;
@@ -317,3 +316,6 @@ h1:first-of-type {
       font-weight: bold;
     }
     
+  .profile-content{
+    position: fixed;
+  }
